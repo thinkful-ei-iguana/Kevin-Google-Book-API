@@ -5,12 +5,18 @@ import Filters from './Filters/Filters'
 import Display from './Display/Display'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
+  state = {
+      books: [],
+      loading: false,
+      error: null
     }
+
+  fetchBooks = (url) => {
+    fetch(url)
+      .then(res => res.json())
+      //.then(res => this.setState({books}));
   }
+
   render() {
     return (
       <main className='App'>
