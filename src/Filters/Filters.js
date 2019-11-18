@@ -27,4 +27,11 @@ class Filters extends React.Component {
     }
 }
 
+/*
+This needs to make an API request using the value of the input
+from Search.js, along with a filter or printType value from the
+select elements here.  Then (using a promise) set the books state
+in App to those results.
+*/
+
 export default Filters

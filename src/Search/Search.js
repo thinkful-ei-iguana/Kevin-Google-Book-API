@@ -16,4 +16,12 @@ class Search extends React.Component {
     }
 }
 
+/*
+This form needs to, on submit, make an API call to a url using
+the value of the input like so 
+"GET https://www.googleapis.com/books/v1/volumes?q={search terms}"
+then (using a promise) add those results to the books state in App
+and also update the search state in App.
+*/
+
 export default Search

@@ -7,6 +7,7 @@ import Display from './Display/Display'
 class App extends React.Component {
   state = {
       books: [],
+      search: "",
       loading: false,
       error: null
     }
