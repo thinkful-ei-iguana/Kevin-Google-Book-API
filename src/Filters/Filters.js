@@ -3,7 +3,7 @@ import React from 'react'
 class Filters extends React.Component {
     render() {
         return(
-            <form>
+            <form className="filters" onChange={e => this.props.filter(e)}>
                 <label>
                     Print Type:
                     <select id="print-type-select">
@@ -26,12 +26,5 @@ class Filters extends React.Component {
         )
     }
 }
-
-/*
-This needs to make an API request using the value of the input
-from Search.js, along with a filter or printType value from the
-select elements here.  Then (using a promise) set the books state
-in App to those results.
-*/
 
 export default Filters

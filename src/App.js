@@ -21,7 +21,7 @@ class App extends React.Component {
     const query = document.getElementById("search-query").value;
     console.log('default prevented')
     console.log('form value is: ', query)
-    this.setState({search: query})
+    this.setState({search: query}, this.fetchBooks)
   }
 
   updateFilters = (e) => {
@@ -29,17 +29,31 @@ class App extends React.Component {
     console.log('print type is: ', printType);
     const bookType = document.getElementById("book-type-select").value;
     console.log('book type is: ', bookType);
+    this.setState({printType: printType, bookType: bookType}, this.applyFilters)
   }
 
-  //Find the right place to call this
   fetchBooks = () => {
     fetch(`${baseUrl}${this.state.search}`)
       .then(res => res.json())
-      .then(res => this.setState({books: res}));
+      .then(res => this.setState({books: res.items}));
     console.log(this.state.books)
   }
 
- 
+  applyFilters = () => {
+    let string;
+    if (this.state.printType === null && this.state.bookType === null) {
+      string =`${baseUrl}${this.state.search}`
+    } else if (this.state.printType === null) {
+      string =`${baseUrl}${this.state.search}&filter=${this.bookType}`
+    } else if (this.state.bookType === null) {
+      string =`${baseUrl}${this.state.search}&printType=${this.printType}`
+    } else {
+      string = `${baseUrl}${this.state.search}&filter=${this.bookType}&printType=${this.state.printType}`
+    } fetch(`${string}`)
+    .then(res => res.json())
+    .then(res => this.setState({books: res}));
+    console.log(this.state.books)
+  }
 
   render() {
     return (
@@ -53,7 +67,9 @@ class App extends React.Component {
           filter={this.updateFilters}
           state={this.state}
         />
-        <Display />
+        <Display 
+          state={this.state}
+        />
       </main>
     )
   }
